@@ -42,18 +42,18 @@ const postContext = {
       }
       // 生成行号
       let codes = $(this).text().split('\n') || []
-      let nums = codes.length-1
+      let nums = codes.length - 1
       let lineDigit = String(nums).length
       if (lineDigit === 1) lineDigit = 2
       let lis = ''
       for (var i = 0; i < nums; i++) {
-        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i]))? 'class="code-select"' : ''}>${String(i + 1).padStart(lineDigit, 0)}</li>`
+        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(i + 1).padStart(lineDigit, 0)}</li>`
       }
       if (codes[nums].trim() !== '') {
-        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i]))? 'class="code-select"' : ''}>${String(nums + 1).padStart(lineDigit, 0)}</li>`
+        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(nums + 1).padStart(lineDigit, 0)}</li>`
       }
       if (lines) {
-        $(this).text($(this).text().replace(/(^\s*)\|\+\s/gm,'$1'))
+        $(this).text($(this).text().replace(/(^\s*)\|\+\s/gm, '$1'))
       }
       // 代码块的id，用于代码块复制和折叠
       let id = `codeBlock${index}-${new Date().getTime()}`
@@ -86,13 +86,13 @@ const postContext = {
   },
   /* 初始化喜欢功能 */
   /* 点赞 */
-  initLike() {
-    Utils.initLikeButton('.admire .agree.like', 'posts')
-  },
+  // initLike() {
+  //   Utils.initLikeButton('.admire .agree.like', 'posts')
+  // },
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    if(typeof hljs !== 'undefined' && hljs !== null) {
+    if (typeof hljs !== 'undefined' && hljs !== null) {
       document.querySelectorAll('code[data-highlighted="yes"]').forEach(element => {
         element.removeAttribute('data-highlighted')
       })
@@ -103,12 +103,12 @@ const postContext = {
   /**
      * 初始化分享
      */
-  initShare() {
-    if (!window.DShare) return
-    let imageUrl = $('.cover-image').css('background-image')
-    imageUrl && (imageUrl = imageUrl.substring(5, imageUrl.length - 2))
-    DShare.create('.dshare', {image: imageUrl, imageSelector: '.main-content'})
-  },
+  // initShare() {
+  //   if (!window.DShare) return
+  //   let imageUrl = $('.cover-image').css('background-image')
+  //   imageUrl && (imageUrl = imageUrl.substring(5, imageUrl.length - 2))
+  //   DShare.create('.dshare', {image: imageUrl, imageSelector: '.main-content'})
+  // },
   /* 代码块复制 */
   initClipboard() {
     if (window.clipboard) {
@@ -173,7 +173,7 @@ const postContext = {
       Utils.foldBlock($(this).parent())
     })
     // 喜欢
-    Utils.initLikeEvent('.admire .agree.like', 'posts', ($elem) => $elem.find('span').find('span'))
+    // Utils.initLikeEvent('.admire .agree.like', 'posts', ($elem) => $elem.find('span').find('span'))
     // 隐藏内容
     window.onCommentSuccessEvent = (comment, target) => {
       let name = encrypt('mew-hide-' + target)
